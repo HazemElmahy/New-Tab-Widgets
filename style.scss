@@ -1,0 +1,168 @@
+@font-face {
+  font-family: Nunito;
+  src: url("/home/hazem/Personal/startup/assets/Nunito/Nunito-VariableFont_wght.ttf");
+}
+
+body {
+  background-color: black;
+  overflow: hidden;
+  font-family: "Nunito";
+  color: white;
+}
+
+.bg {
+  z-index: -1;
+  background-image: url("/home/hazem/Personal/startup/assets/cmyk-umbrella.png");
+  background-size: cover;
+  filter: blur(40px);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.grad-text {
+  background: linear-gradient(59deg, white, #00f3ff, white);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page {
+  text-align: center;
+}
+
+.tasks {
+  border: 1px solid white;
+  border-radius: 9px;
+  width: 50%;
+  height: 55vh;
+  padding: 20px;
+  /* position: absolute; */
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.201);
+  font-size: 20px;
+}
+
+.title {
+  margin-top: 10%;
+  font-size: 50px;
+}
+
+.task {
+  border: 1px solid white;
+  border-radius: 9px;
+  width: 50%;
+  // height: 55vh;
+  padding: 20px;
+  /* position: absolute; */
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.201);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.201);
+    box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.315);
+  }
+}
+
+#task1-box {
+  background-color: aqua;
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+}
+
+#task1 {
+  visibility: hidden;
+}
+
+#task1-box {
+  background-color: transparent;
+  position: relative;
+
+  &:before {
+    content: "☹";
+    position: absolute;
+    left: -3px;
+    top: -5px;
+    transition: opacity 0.5s ease;
+  }
+}
+
+#task1-title {
+  &:before {
+    content: "Did it?";
+  }
+}
+
+#task1:checked {
+  ~ #task1-box {
+    background-color: transparent;
+    position: relative;
+
+    &:before {
+      content: "😄";
+      position: absolute;
+      left: -3px;
+      top: -5px;
+    }
+  }
+
+  ~ #task1-title {
+    &:before {
+      content: "Yes I did!";
+    }
+  }
+}
+
+.kat_box {
+  top: 10%;
+  position: fixed;
+  flex-direction: column;
+  display: flex;
+  background: #fffffff7;
+  border-radius: 10px 0;
+  color: black;
+  right: 5%;
+  width: 100px;
+  height: 100px;
+  font-size: 24px;
+}
+.kat_input {
+  border-radius: 0 0 10px 0;
+  padding: 7px;
+  transform: translateY(-12px);
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 0 solid #121833;
+  box-shadow: 0px 0px 16px 2px #1318335e;
+}
+
+.widget_title {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  margin: 0;
+  font-size: 10px;
+}
+
+.header {
+  border-radius: 10px 0;
+  background-color: rgb(211 67 255 / 35%);
+  padding: 2px 0;
+  cursor: move;
+  box-shadow: 0px 0px 8px 2px #8cff5fde;
+  transition: all 0.5s;
+}
+
+.header:hover {
+  box-shadow: 0px 0px 20px 3px #f7ff74;
+}
