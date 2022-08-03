@@ -1,68 +1,71 @@
+kata = "";
 var i,
   checkboxes = document.querySelectorAll("input");
-  dragElement(document.getElementById("kana_widget"));
+dragElement(document.getElementById("kana_widget"));
 
-katakana = {
-  ア: "A",
-  エ: "E",
-  イ: "I",
-  ウ: "U",
-  オ: "O",
-  ラ: "RA",
-  レ: "RE",
-  リ: "RI",
-  ル: "RU",
-  ロ: "RO",
-  タ: "TA",
-  テ: "TE",
-  チ: "TI",
-  ツ: "TU",
-  ト: "TO",
-  サ: "SA",
-  セ: "SE",
-  シ: "SI",
-  ス: "SU",
-  ソ: "SO",
-  ハ: "HA",
-  ヘ: "HE",
-  ヒ: "HI",
-  フ: "FU",
-  ホ: "HO",
-  カ: "KA",
-  ケ: "KE",
-  キ: "KI",
-  ク: "KU",
-  コ: "KO",
-  ナ: "NA",
-  ネ: "NE",
-  ニ: "NI",
-  ヌ: "NU",
-  ノ: "NO",
-  マ: "MA",
-  メ: "ME",
-  ミ: "MI",
-  ム: "MU",
-  モ: "MO",
-  ヤ: "YA",
-  ユ: "YU",
-  ヨ: "YO",
-  ワ: "WA",
-  ヲ: "WO",
-  ン: "N",
-};
+katakana = [
+  "ア",
+  "エ",
+  "イ",
+  "ウ",
+  "オ",
+  "ラ",
+  "レ",
+  "リ",
+  "ル",
+  "ロ",
+  "タ",
+  "テ",
+  "チ",
+  "ツ",
+  "ト",
+  "サ",
+  "セ",
+  "シ",
+  "ス",
+  "ソ",
+  "ハ",
+  "ヘ",
+  "ヒ",
+  "フ",
+  "ホ",
+  "カ",
+  "ケ",
+  "キ",
+  "ク",
+  "コ",
+  "ナ",
+  "ネ",
+  "ニ",
+  "ヌ",
+  "ノ",
+  "マ",
+  "メ",
+  "ミ",
+  "ム",
+  "モ",
+  "ヤ",
+  "ユ",
+  "ヨ",
+  "ワ",
+  "ヲ",
+  "ン",
+];
 kat_input = document.getElementById("kat_input");
 get_random_character();
 
 document.onkeydown = function (e) {
-    e = e || window.event;
-    // use e.keyCode
-    if (e.key == 'k') {
-        kat_input.focus()
-    } else if (e.key == 'Escape') {
-        kat_input.blur()
+  e = e || window.event;
+  // use e.keyCode
+  if (e.key == "k") {
+    if (document.activeElement !== kat_input) {
+      kat_input.focus(function () {});
+      e.preventDefault();
     }
+  } else if (e.key == "Escape") {
+    kat_input.blur();
+  }
 };
-
 
 load_();
 
@@ -88,25 +91,28 @@ function delay(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-function get_random_character() {
-  var keys = Object.keys(katakana);
-  random_katakana = keys[Math.floor(Math.random() * keys.length)];
-  answer = katakana[random_katakana];
+function set_random_character() {
+  // var keys = Object.keys(katakana);
+  kata = katakana[Math.floor(Math.random() * katakana.length)];
+  // answer = katakana[random_katakana];
 
   //   random_katakana = katakana[keys[(keys.length * Math.random()) << 0]];
   katakana_holder = document.getElementById("katakana_char");
-  katakana_holder.textContent = random_katakana;
+  katakana_holder.textContent = kata;
+}
 
+function get_random_character() {
+  set_random_character();
   kat_input.addEventListener("input", function () {
-    if (this.value.toUpperCase() == answer) {
+    if (this.value.toUpperCase() == kata) {
       kat_input.style.backgroundColor = "#99ef99";
       kat_input.disabled = true;
       delay(1000).then(function () {
-        kat_input.value = ''
+        kat_input.value = "";
         kat_input.style.backgroundColor = "white";
         kat_input.disabled = false;
         kat_input.focus();
-        get_random_character();
+        set_random_character();
       });
     } else {
       if (this.value.length <= 1) {
@@ -119,7 +125,10 @@ function get_random_character() {
 }
 
 function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
   if (document.getElementById(elmnt.id + "header")) {
     // if present, the header is where you move the DIV from:
     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
@@ -148,8 +157,8 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
   }
 
   function closeDragElement() {
