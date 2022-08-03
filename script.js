@@ -1,57 +1,61 @@
-kata = "";
+var kata = "";
 var i,
   checkboxes = document.querySelectorAll("input");
 dragElement(document.getElementById("kana_widget"));
-
-katakana = [
-  "ア",
-  "エ",
-  "イ",
-  "ウ",
-  "オ",
-  "ラ",
-  "レ",
-  "リ",
-  "ル",
-  "ロ",
-  "タ",
-  "テ",
-  "チ",
-  "ツ",
-  "ト",
-  "サ",
-  "セ",
-  "シ",
-  "ス",
-  "ソ",
-  "ハ",
-  "ヘ",
-  "ヒ",
-  "フ",
-  "ホ",
-  "カ",
-  "ケ",
-  "キ",
-  "ク",
-  "コ",
-  "ナ",
-  "ネ",
-  "ニ",
-  "ヌ",
-  "ノ",
-  "マ",
-  "メ",
-  "ミ",
-  "ム",
-  "モ",
-  "ヤ",
-  "ユ",
-  "ヨ",
-  "ワ",
-  "ヲ",
-  "ン",
-];
+function delay(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+katakana_obj = {
+  ア: "A",
+  エ: "E",
+  イ: "I",
+  ウ: "U",
+  オ: "O",
+  ラ: "RA",
+  レ: "RE",
+  リ: "RI",
+  ル: "RU",
+  ロ: "RO",
+  タ: "TA",
+  テ: "TE",
+  チ: "TI",
+  ツ: "TU",
+  ト: "TO",
+  サ: "SA",
+  セ: "SE",
+  シ: "SI",
+  ス: "SU",
+  ソ: "SO",
+  ハ: "HA",
+  ヘ: "HE",
+  ヒ: "HI",
+  フ: "FU",
+  ホ: "HO",
+  カ: "KA",
+  ケ: "KE",
+  キ: "KI",
+  ク: "KU",
+  コ: "KO",
+  ナ: "NA",
+  ネ: "NE",
+  ニ: "NI",
+  ヌ: "NU",
+  ノ: "NO",
+  マ: "MA",
+  メ: "ME",
+  ミ: "MI",
+  ム: "MU",
+  モ: "MO",
+  ヤ: "YA",
+  ユ: "YU",
+  ヨ: "YO",
+  ワ: "WA",
+  ヲ: "WO",
+  ン: "N",
+};
+katakana = Object.keys(katakana_obj);
 kat_input = document.getElementById("kat_input");
+hint = document.getElementById("hint");
 get_random_character();
 
 document.onkeydown = function (e) {
@@ -64,6 +68,15 @@ document.onkeydown = function (e) {
     }
   } else if (e.key == "Escape") {
     kat_input.blur();
+  } else if (e.ctrlKey && e.key == "m") {
+    hint.textContent = katakana_obj[kata];
+    hint.classList.add("hint_shown");
+    hint.classList.remove("hint_hidden");
+    delay(500).then(function () {
+      hint.classList.remove("hint_shown");
+      hint.classList.add("hint_hidden");
+      delay(200).then(() => (hint.textContent = ""));
+    });
   }
 };
 
@@ -85,10 +98,6 @@ function load_() {
     checkboxes[i].checked =
       localStorage.getItem(checkboxes[i].value) === "true" ? true : false;
   }
-}
-
-function delay(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 function set_random_character() {

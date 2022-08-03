@@ -156,4 +156,23 @@ body {
 
 .header:hover {
   box-shadow: 0px 0px 20px 3px #f7ff74;
+}
+
+#hint {
+  position: absolute;
+  right: 5px;
+  top: 17px;
+  margin: 0;
+  color: darkslategrey;
+  font-size: 15px;
+  font-weight: bold;
+  transition: all 0.1s;
+}
+
+.hint_hidden {
+  transform: scale(0);
+}
+
+.hint_shown {
+  transform: scale(1);
 }/*# sourceMappingURL=style.css.map */
