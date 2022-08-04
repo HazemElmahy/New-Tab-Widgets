@@ -120,44 +120,53 @@ body {
   }
 }
 
-.kat_box {
-  top: 10%;
+.widget {
   position: fixed;
-  flex-direction: column;
   display: flex;
-  background: #fffffff7;
+  background: rgba(255, 255, 255, 0.968627451);
   border-radius: 10px 0;
   color: black;
   right: 5%;
-  width: 100px;
-  height: 100px;
+  width: 111px;
+  height: 128px;
   font-size: 24px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  & h4 {
+    margin: 0;
+  }
+}
+.p_1 {
+  top: 10%;
+}
+.p_2 {
+  top: calc(20% + 128px);
 }
 .kat_input {
   border-radius: 0 0 10px 0;
-  padding: 7px;
-  transform: translateY(-12px);
+  padding: 7px 0;
+  /* transform: translateY(-12px); */
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
   border: 0 solid #121833;
-  box-shadow: 0px 0px 16px 2px #1318335e;
+  width: 100%;
+  /* box-sizing: border-box; */
+  font-size: 15px;
+  box-shadow: 0px 0px 16px 2px rgb(19 24 51 / 37%);
 }
 
 .widget_title {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
+  width: 100%;
   margin: 0;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .header {
   border-radius: 10px 0;
   background-color: rgb(211 67 255 / 35%);
-  padding: 2px 0;
+  padding: 4px 0;
   cursor: move;
   box-shadow: 0px 0px 8px 2px #8cff5fde;
   transition: all 0.5s;
@@ -182,5 +191,48 @@ body {
 }
 
 .hint_shown {
-    transform: scale(1.0);
+  transform: scale(1);
+}
+
+.timer {
+  display: flex;
+}
+
+.timer_container {
+  width: 25px;
+  height: 25px;
+  background-color: rgba(169, 169, 169, 0.5490196078);
+  margin: 3px;
+  border-radius: 3px;
+  font-size: 16px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 0;
+}
+.timer_colon {
+  margin: 0;
+  color: grey;
+}
+
+// input[type="number"] {
+//   -webkit-appearance: textfield;
+//   -moz-appearance: textfield;
+//   appearance: textfield;
+// }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+button {
+  cursor: pointer;
+      transition: all 0.2s;
+  &:active {
+    transition: all 0s;
+    opacity: 0.1;
+  }
 }
