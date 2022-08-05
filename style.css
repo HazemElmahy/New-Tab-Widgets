@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @font-face {
   font-family: Nunito;
-  src: url("/home/hazem/Personal/startup/assets/Nunito/Nunito-VariableFont_wght.ttf");
+  src: url("assets/Nunito/Nunito-VariableFont_wght.ttf");
 }
 body {
   background-color: black;
@@ -12,7 +12,7 @@ body {
 
 .bg {
   z-index: -1;
-  background-image: url("/home/hazem/Personal/startup/assets/cmyk-umbrella.png");
+  background-image: url("assets/cmyk-umbrella.png");
   background-size: cover;
   filter: blur(40px);
   position: absolute;
@@ -172,7 +172,7 @@ body {
 #hint {
   position: absolute;
   right: 5px;
-  top: 17px;
+  top: 20%;
   margin: 0;
   color: darkslategrey;
   font-size: 15px;
@@ -221,7 +221,7 @@ button {
   cursor: pointer;
   transition: all 0.2s;
 }
-button:active {
+button:active:enabled {
   transition: all 0s;
   opacity: 0.1;
 }/*# sourceMappingURL=style.css.map */

@@ -2,110 +2,236 @@ var kata = "";
 var i,
   checkboxes = document.querySelectorAll("input");
 
+var snd = new Audio("assets/alarm.wav");
+
 widgets = document.getElementsByClassName("widget");
 Array.from(widgets).forEach((widget) => dragElement(widget));
 
 function delay(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
-katakana_obj = {
-  ア: "A",
-  エ: "E",
-  イ: "I",
-  ウ: "U",
-  オ: "O",
-  ラ: "RA",
-  レ: "RE",
-  リ: "RI",
-  ル: "RU",
-  ロ: "RO",
-  タ: "TA",
-  テ: "TE",
-  チ: "TI",
-  ツ: "TU",
-  ト: "TO",
-  サ: "SA",
-  セ: "SE",
-  シ: "SI",
-  ス: "SU",
-  ソ: "SO",
-  ハ: "HA",
-  ヘ: "HE",
-  ヒ: "HI",
-  フ: "FU",
-  ホ: "HO",
-  カ: "KA",
-  ケ: "KE",
-  キ: "KI",
-  ク: "KU",
-  コ: "KO",
-  ナ: "NA",
-  ネ: "NE",
-  ニ: "NI",
-  ヌ: "NU",
-  ノ: "NO",
-  マ: "MA",
-  メ: "ME",
-  ミ: "MI",
-  ム: "MU",
-  モ: "MO",
-  ヤ: "YA",
-  ユ: "YU",
-  ヨ: "YO",
-  ワ: "WA",
-  ヲ: "WO",
-  ン: "N",
-  あ: "A",
-  え: "E",
-  い: "I",
-  う: "U",
-  お: "O",
-  ら: "RA",
-  れ: "RE",
-  り: "RI",
-  る: "RU",
-  ろ: "RO",
-  た: "TA",
-  て: "TE",
-  ち: "TI",
-  つ: "TU",
-  と: "TO",
-  さ: "SA",
-  せ: "SE",
-  し: "SI",
-  す: "SU",
-  そ: "SO",
-  は: "HA",
-  へ: "HE",
-  ひ: "HI",
-  ふ: "FU",
-  ほ: "HO",
-  か: "KA",
-  け: "KE",
-  き: "KI",
-  く: "KU",
-  こ: "KO",
-  な: "NA",
-  ね: "NE",
-  に: "NI",
-  ぬ: "NU",
-  の: "NO",
-  ま: "MA",
-  め: "ME",
-  み: "MI",
-  む: "MU",
-  も: "MO",
-  や: "YA",
-  ゆ: "YU",
-  よ: "YO",
-  わ: "WA",
-  を: "WO",
-  ん: "N",
+kana_obj = {
+  ア: "a",
+  あ: "a",
+  イ: "i",
+  い: "i",
+  ウ: "u",
+  う: "u",
+  エ: "e",
+  え: "e",
+  オ: "o",
+  お: "o",
+  カ: "ka",
+  か: "ka",
+  ガ: "ga",
+  が: "ga",
+  キ: "ki",
+  き: "ki",
+  ギ: "gi",
+  ぎ: "gi",
+  ク: "ku",
+  く: "ku",
+  グ: "gu",
+  ぐ: "gu",
+  ケ: "ke",
+  け: "ke",
+  ゲ: "ge",
+  げ: "ge",
+  コ: "ko",
+  こ: "ko",
+  ゴ: "go",
+  ご: "go",
+  キャ: "kya",
+  きゃ: "kya",
+  ギャ: "gya",
+  ぎゃ: "gya",
+  キュ: "kyu",
+  きゅ: "kyu",
+  ギュ: "gyu",
+  ぎゅ: "gyu",
+  キョ: "kyo",
+  きょ: "kyo",
+  ギョ: "gyo",
+  ぎょ: "gyo",
+  サ: "sa",
+  さ: "sa",
+  ザ: "za",
+  ざ: "za",
+  シ: "shi",
+  し: "shi",
+  ジ: "ji",
+  じ: "ji",
+  ス: "su",
+  す: "su",
+  ズ: "zu",
+  ず: "zu",
+  セ: "se",
+  せ: "se",
+  ゼ: "ze",
+  ぜ: "ze",
+  ソ: "so",
+  そ: "so",
+  ゾ: "zo",
+  ぞ: "zo",
+  シャ: "sha",
+  しゃ: "sha",
+  ジャ: "ja",
+  じゃ: "ja",
+  シュ: "shu",
+  しゅ: "shu",
+  ジュ: "ju",
+  じゅ: "ju",
+  ショ: "sho",
+  しょ: "sho",
+  ジョ: "jo",
+  じょ: "jo",
+  タ: "ta",
+  た: "ta",
+  ダ: "da",
+  だ: "da",
+  チ: "chi",
+  ち: "chi",
+  ヂ: "ji",
+  ぢ: "ji",
+  ツ: "tsu",
+  つ: "tsu",
+  ヅ: "zu",
+  づ: "zu",
+  テ: "te",
+  て: "te",
+  デ: "de",
+  で: "de",
+  ト: "to",
+  と: "to",
+  ド: "do",
+  ど: "do",
+  チャ: "cha",
+  ちゃ: "cha",
+  ヂャ: "ja",
+  ぢゃ: "ja",
+  チュ: "chu",
+  ちゅ: "chu",
+  ヂュ: "jo",
+  ぢゅ: "ju",
+  チョ: "cho",
+  ちょ: "cho",
+  ぢょ: "jo",
+  ナ: "na",
+  な: "na",
+  ニ: "ni",
+  に: "ni",
+  ヌ: "nu",
+  ぬ: "nu",
+  ネ: "ne",
+  ね: "ne",
+  ノ: "no",
+  の: "no",
+  ニャ: "nya",
+  にゃ: "nya",
+  ニュ: "nyu",
+  にゅ: "nyu",
+  ニョ: "nyo",
+  にょ: "nyo",
+  ハ: "ha",
+  は: "ha",
+  バ: "ba",
+  ば: "ba",
+  パ: "pa",
+  ぱ: "pa",
+  ヒ: "hi",
+  ひ: "hi",
+  ビ: "bi",
+  び: "bi",
+  ピ: "pi",
+  ぴ: "pi",
+  フ: "fu",
+  ふ: "fu",
+  ブ: "bu",
+  ぶ: "bu",
+  プ: "pu",
+  ぷ: "pu",
+  ヘ: "he",
+  へ: "he",
+  ベ: "be",
+  べ: "be",
+  ペ: "pe",
+  ぺ: "pe",
+  ホ: "ho",
+  ほ: "ho",
+  ボ: "bo",
+  ぼ: "bo",
+  ポ: "po",
+  ぽ: "po",
+  ヒャ: "hya",
+  ひゃ: "hya",
+  ビャ: "bya",
+  びゃ: "bya",
+  ピャ: "pya",
+  ぴゃ: "pya",
+  ヒュ: "hyu",
+  ひゅ: "hyu",
+  ビュ: "byu",
+  びゅ: "byu",
+  ピュ: "pyu",
+  ぴゅ: "pyu",
+  ヒョ: "hyo",
+  ひょ: "hyo",
+  ビョ: "byo",
+  びょ: "byo",
+  ピョ: "pyo",
+  ぴょ: "pyo",
+  マ: "ma",
+  ま: "ma",
+  ミ: "mi",
+  み: "mi",
+  ム: "mu",
+  む: "mu",
+  メ: "me",
+  め: "me",
+  モ: "mo",
+  も: "mo",
+  ミャ: "mya",
+  みゃ: "mya",
+  ミュ: "myu",
+  みゅ: "myu",
+  ミョ: "myo",
+  みょ: "myo",
+  ヤ: "ya",
+  や: "ya",
+  ユ: "yu",
+  ゆ: "yu",
+  ヨ: "yo",
+  よ: "yo",
+  ラ: "ra",
+  ら: "ra",
+  リ: "ri",
+  り: "ri",
+  ル: "ru",
+  る: "ru",
+  レ: "re",
+  れ: "re",
+  ロ: "ro",
+  ろ: "ro",
+  リャ: "rya",
+  りゃ: "rya",
+  リュ: "ryu",
+  りゅ: "ryu",
+  リョ: "ryo",
+  りょ: "ryo",
+  ワ: "wa",
+  わ: "wa",
+  ヲ: "wo",
+  を: "wo",
+  ン: "n",
+  ん: "n",
 };
-katakana = Object.keys(katakana_obj);
+katakana = Object.keys(kana_obj);
 kat_input = document.getElementById("kat_input");
 hint = document.getElementById("hint");
 get_random_character();
+
+timer_containers = document.getElementsByClassName("timer_container");
+timer_button = document.getElementById("timer_start");
 
 document.onkeydown = function (e) {
   e = e || window.event;
@@ -119,7 +245,7 @@ document.onkeydown = function (e) {
     kat_input.blur();
   } else if (document.activeElement === kat_input) {
     if (e.key === "Enter") {
-      hint.textContent = katakana_obj[kata];
+      hint.textContent = kana_obj[kata];
       hint.classList.add("hint_shown");
       hint.classList.remove("hint_hidden");
       delay(500).then(function () {
@@ -128,6 +254,12 @@ document.onkeydown = function (e) {
         delay(200).then(() => (hint.textContent = ""));
       });
     }
+  } else if ([].slice.call(timer_containers).includes(document.activeElement)) {
+    if (e.key === "Enter") {
+      timer_button.click();
+    }
+  } else if (e.key == "t") {
+    timer_button.click();
   }
 };
 
@@ -227,8 +359,6 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
-timer_containers = document.getElementsByClassName("timer_container");
-timer_button = document.getElementById("timer_start");
 timer_button.setAttribute("onclick", "timer_start()");
 
 var timerInterval;
@@ -252,9 +382,36 @@ seconds_input.addEventListener("input", function () {
   s = this.value;
 });
 
+function is_empty(input) {
+  if (input.value == 0 || input.value == "") {
+    return true;
+  }
+  return false;
+}
+
+function check_empty() {
+  if (
+    is_empty(hours_input) &&
+    is_empty(minutes_input) &&
+    is_empty(seconds_input)
+  ) {
+    console.log("hello");
+    console.log(timer_button.disabled);
+    timer_button.disabled = true;
+    console.log(timer_button.disabled);
+  } else {
+    console.log("nonono");
+    timer_button.disabled = false;
+  }
+}
+
+check_empty();
+
 function timer_stop() {
   clearInterval(timerInterval);
-  clearInterval(beepInterval);
+  // clearInterval(beepInterval);
+  snd.pause();
+  snd.currentTime = 0;
   timer_button.textContent = "Start";
   timer_button.setAttribute("onclick", "timer_start()");
 
@@ -267,6 +424,11 @@ function timer_stop() {
     (container) => (container.disabled = false)
   );
 }
+
+snd.addEventListener("ended", function () {
+  console.log("as");
+  timer_stop();
+});
 
 function timer_start() {
   console.log("here");
@@ -293,11 +455,26 @@ function timer_start() {
           hours_input.value--;
           minutes_input.value = 59;
         } else {
+          if (Notification.permission !== "granted") {
+            console.log('asdf2222')
+            Notification.requestPermission();
+          } else {
+            console.log("asdf");
+            var notification = new Notification("timer_finished", {
+              icon: "https://cdn0.iconfinder.com/data/icons/basic-ui-elements-colored/700/09_bell-3-512.png",
+              body: "timer finised",
+            });
+          }
+
           clearInterval(timerInterval);
           Array.from(timer_containers).forEach(
             (container) => (container.disabled = false)
           );
-          beepInterval = setInterval(beep, 500);
+          setTimeout(function () {
+            // beepInterval = setInterval(beep, 200);
+
+            snd.play();
+          }, 10);
         }
       }
     }
@@ -314,11 +491,17 @@ function addZeroItem(input) {
   if (input.value != "" && ("" + input.value).length < 2) {
     input.value = "0" + input.value;
   }
+  if (input.value == 0) {
+    input.value = "";
+  }
 }
 
 Array.from(timer_containers).forEach(function (container) {
-  console.log(container);
   container.oninput = function () {
+    check_empty();
+    if (this.value == 0) {
+      this.value = "";
+    }
     var max = parseInt(this.max);
 
     if (parseInt(this.value) > max) {
@@ -327,9 +510,3 @@ Array.from(timer_containers).forEach(function (container) {
     // if (parseInt(this.value, 10) < 10) this.value = "0" + this.value;
   };
 });
-function beep() {
-  var snd = new Audio(
-    "data:audio/wav;base64,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qJrx4KOQjahZxWbcZgztj2c49nKmkId44S71j0c8eV9yDK6uPRzx5X18eDvjvQ6yKo9ZSS6l//8elePK/Lf//IInrOF/FvDoADYAGBMGb7FtErm5MXMlmPAJQVgWta7Zx2go+8xJ0UiCb8LHHdftWyLJE0QIAIsI+UbXu67dZMjmgDGCGl1H+vpF4NSDckSIkk7Vd+sxEhBQMRU8j/12UIRhzSaUdQ+rQU5kGeFxm+hb1oh6pWWmv3uvmReDl0UnvtapVaIzo1jZbf/pD6ElLqSX+rUmOQNpJFa/r+sa4e/pBlAABoAAAAA3CUgShLdGIxsY7AUABPRrgCABdDuQ5GC7DqPQCgbbJUAoRSUj+NIEig0YfyWUho1VBBBA//uQZB4ABZx5zfMakeAAAAmwAAAAF5F3P0w9GtAAACfAAAAAwLhMDmAYWMgVEG1U0FIGCBgXBXAtfMH10000EEEEEECUBYln03TTTdNBDZopopYvrTTdNa325mImNg3TTPV9q3pmY0xoO6bv3r00y+IDGid/9aaaZTGMuj9mpu9Mpio1dXrr5HERTZSmqU36A3CumzN/9Robv/Xx4v9ijkSRSNLQhAWumap82WRSBUqXStV/YcS+XVLnSS+WLDroqArFkMEsAS+eWmrUzrO0oEmE40RlMZ5+ODIkAyKAGUwZ3mVKmcamcJnMW26MRPgUw6j+LkhyHGVGYjSUUKNpuJUQoOIAyDvEyG8S5yfK6dhZc0Tx1KI/gviKL6qvvFs1+bWtaz58uUNnryq6kt5RzOCkPWlVqVX2a/EEBUdU1KrXLf40GoiiFXK///qpoiDXrOgqDR38JB0bw7SoL+ZB9o1RCkQjQ2CBYZKd/+VJxZRRZlqSkKiws0WFxUyCwsKiMy7hUVFhIaCrNQsKkTIsLivwKKigsj8XYlwt/WKi2N4d//uQRCSAAjURNIHpMZBGYiaQPSYyAAABLAAAAAAAACWAAAAApUF/Mg+0aohSIRobBAsMlO//Kk4soosy1JSFRYWaLC4qZBYWFRGZdwqKiwkNBVmoWFSJkWFxX4FFRQWR+LsS4W/rFRb/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////VEFHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU291bmRib3kuZGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAwNGh0dHA6Ly93d3cuc291bmRib3kuZGUAAAAAAAAAACU="
-  );
-  snd.play();
-}
