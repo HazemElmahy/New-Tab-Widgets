@@ -316,49 +316,6 @@ function get_random_character() {
   });
 }
 
-function dragElement(elmnt) {
-  var pos1 = 0,
-    pos2 = 0,
-    pos3 = 0,
-    pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-  }
-
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
-    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
-  }
-
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
 timer_button.setAttribute("onclick", "timer_start()");
 
 var timerInterval;
@@ -456,7 +413,7 @@ function timer_start() {
           minutes_input.value = 59;
         } else {
           if (Notification.permission !== "granted") {
-            console.log('asdf2222')
+            console.log("asdf2222");
             Notification.requestPermission();
           } else {
             console.log("asdf");
@@ -510,3 +467,116 @@ Array.from(timer_containers).forEach(function (container) {
     // if (parseInt(this.value, 10) < 10) this.value = "0" + this.value;
   };
 });
+
+Array.from(widgets).forEach(function (widget) {
+  const corner = document.createElement("div");
+  corner.classList.add("corner");
+  corner.id = widget.id + "_corner";
+  // corner. = function () {
+  //   widget.style.transform = "scale(1.5)";
+  // };
+  var posX = 0;
+  var posY = 0;
+  var scale = 1;
+
+  corner.addEventListener(
+    "mousedown",
+    function (e) {
+      posX = e.clientX;
+      posY = e.clientY;
+      window.addEventListener("mousemove", mousemove);
+
+      window.addEventListener("mouseup", function (e) {
+        window.removeEventListener("mousemove", mousemove);
+        scale = Number(widget.style.transform.replace(/[^0-9\.]+/g, ""));
+      });
+
+      function mousemove(e) {
+        // console.log(e.offsetX)
+        currentX = posX - e.clientX;
+        currentY = e.clientY - posY;
+        console.log(currentX);
+        widget.style.transform = `scale(${Math.max(
+          scale + currentY * 0.017,
+          scale + currentX * 0.017
+        )})`;
+        // widget.style.transform = `scale(${1 + currentX * 0.02}, ${
+        //   1 + currentY * 0.02
+        // })`;
+
+        // console.log(e.clientX - posX);
+      }
+      // if (e.offsetX < BORDER_SIZE) {
+      //   m_pos = e.x;
+      //   document.addEventListener("mousemove", resize, false);
+      // }
+    }
+    // false
+  );
+  widget.appendChild(corner);
+});
+
+// function resizeElement(elmnt) {
+//   var posX = 0,
+//     posY = 0;
+//   document.getElementById(elmnt.id + "_corner").onmousedown = resizeMouseDown;
+// }
+
+// function resizeMouseDown(e) {
+//       e = e || window.event;
+//     e.preventDefault();
+
+//       pos1 = e.clientX;
+//   pos2 = e.clientY;
+//   document.onmouseup = closeResizeElement;
+//     // call a function whenever the cursor moves:
+//     document.onmousemove = elementResize;
+// }
+
+// function elementResize(e) {
+
+// }
+
+function dragElement(elmnt) {
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
