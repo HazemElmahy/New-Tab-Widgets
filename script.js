@@ -352,12 +352,8 @@ function check_empty() {
     is_empty(minutes_input) &&
     is_empty(seconds_input)
   ) {
-    console.log("hello");
-    console.log(timer_button.disabled);
     timer_button.disabled = true;
-    console.log(timer_button.disabled);
   } else {
-    console.log("nonono");
     timer_button.disabled = false;
   }
 }
@@ -383,16 +379,13 @@ function timer_stop() {
 }
 
 snd.addEventListener("ended", function () {
-  console.log("as");
   timer_stop();
 });
 
 function timer_start() {
-  console.log("here");
   timer_button.textContent = "Stop!";
   timer_button.setAttribute("onclick", "timer_stop()");
   // timer_button.classList.add('stop')
-  // timer_button.onclick(() => console.log('asdasdasd'))
   Array.from(timer_containers).forEach(
     (container) => (container.disabled = true)
   );
@@ -413,10 +406,8 @@ function timer_start() {
           minutes_input.value = 59;
         } else {
           if (Notification.permission !== "granted") {
-            console.log("asdf2222");
             Notification.requestPermission();
           } else {
-            console.log("asdf");
             var notification = new Notification("timer_finished", {
               icon: "https://cdn0.iconfinder.com/data/icons/basic-ui-elements-colored/700/09_bell-3-512.png",
               body: "timer finised",
@@ -492,10 +483,8 @@ Array.from(widgets).forEach(function (widget) {
       });
 
       function mousemove(e) {
-        // console.log(e.offsetX)
         currentX = posX - e.clientX;
         currentY = e.clientY - posY;
-        console.log(currentX);
         widget.style.transform = `scale(${Math.max(
           scale + currentY * 0.017,
           scale + currentX * 0.017
@@ -504,7 +493,6 @@ Array.from(widgets).forEach(function (widget) {
         //   1 + currentY * 0.02
         // })`;
 
-        // console.log(e.clientX - posX);
       }
       // if (e.offsetX < BORDER_SIZE) {
       //   m_pos = e.x;
@@ -580,3 +568,42 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+
+date = new Date();
+day = date.getDay();
+// day = 1;
+// day_number =  8;
+day_number = date.getUTCDate();
+last_day = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+calendarDays = document.getElementsByTagName("td");
+extra_day = 1;
+start = false;
+increase = false;
+Array.from(calendarDays).forEach(function (el) {
+  if (el.id == day) {
+    el.classList.add("today");
+    start = true;
+  } else {
+    el.classList.remove("today");
+  }
+  if (start == true) {
+    el.textContent = day_number;
+    day_number++;
+    if (day_number == last_day + 2) {
+      start = false;
+      increase = true;
+      el.classList.add("over");
+    }
+  } else {
+    el.textContent = 'x';
+    el.classList.add("over");
+  }
+
+  if (increase == true) {
+    el.textContent = extra_day;
+    extra_day++;
+  }
+  el.addEventListener("mousedown", function () {
+    el.classList.toggle("selected");
+  });
+});
