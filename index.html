@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/x-icon" href="assets/logo.svg">
+  <link rel="icon" type="image/x-icon" href="assets/logo.svg" />
   <title>Have you done it?</title>
 </head>
 
@@ -28,18 +28,15 @@
       </p>
       <div class="timer">
         <input min="1" max="24" step="1" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;"
-          type="number" placeholder="00" class="timer_container" id="hours">
+          type="number" placeholder="00" class="timer_container" id="hours" />
         <!-- <p class="timer_colon">:</p> -->
         <input min="1" max="59" step="1" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;"
-          type="number" placeholder="00" class="timer_container" id="minutes">
+          type="number" placeholder="00" class="timer_container" id="minutes" />
         <!-- <p class="timer_colon">:</p> -->
         <input min="1" max="59" step="1" onchange="if(parseInt(this.value,10)<10)this.value='0'+this.value;"
-          type="number" placeholder="00" class="timer_container" id="seconds">
+          type="number" placeholder="00" class="timer_container" id="seconds" />
       </div>
-      <Button class="kat_input timer_set" id="timer_start">
-        Start
-
-      </Button>
+      <button class="kat_input timer_set" id="timer_start">Start</button>
     </div>
 
     <div class="widget p_3 big" id="calendar">
@@ -66,45 +63,43 @@
           <td id="5"></td>
           <td id="6"></td>
         </tr>
-        <tr id="two">
-          <td id="sun_1"></td>
-          <td id="sun_2"></td>
-          <td id="sun_3"></td>
-          <td id="sun_4"></td>
-          <td id="sun_5"></td>
-          <td id="sun_5"></td>
-          <td id="sun_5"></td>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
-        <tr id="three">
-          <td id="sun_1"></td>
-          <td id="sun_2"></td>
-          <td id="sun_3"></td>
-          <td id="sun_4"></td>
-          <td id="sun_5"></td>
-          <td id="sun_5"></td>
-          <td id="sun_5"></td>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
-        <tr id="four">
-          <td id="sun_1"></td>
-          <td id="sun_2"></td>
-          <td id="sun_3"></td>
-          <td id="sun_4"></td>
-          <td id="sun_5"></td>
-          <td id="sun_5"></td>
-          <td id="sun_5"></td>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
-        <tr id="five">
-          <td id="sun_1"></td>
-          <td id="sun_2"></td>
-          <td id="sun_3"></td>
-          <td id="sun_4"></td>
-          <td id="sun_5"></td>
-          <td id="sun_5"></td>
-          <td id="sun_5"></td>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
-
       </table>
-
     </div>
     <div class="title">
       <h1 class="grad-text title-text">First Things First!</h1>
@@ -124,5 +119,8 @@
 </body>
 
 <script src="script.js"></script>
+<script type="module" src="kana.js"></script>
+<script src="timer.js"></script>
+<script src="calendar.js"></script>
 
 </html>
