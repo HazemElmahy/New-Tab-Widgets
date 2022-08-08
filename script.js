@@ -489,41 +489,12 @@ Array.from(widgets).forEach(function (widget) {
           scale + currentY * 0.017,
           scale + currentX * 0.017
         )})`;
-        // widget.style.transform = `scale(${1 + currentX * 0.02}, ${
-        //   1 + currentY * 0.02
-        // })`;
-
       }
-      // if (e.offsetX < BORDER_SIZE) {
-      //   m_pos = e.x;
-      //   document.addEventListener("mousemove", resize, false);
-      // }
     }
     // false
   );
   widget.appendChild(corner);
 });
-
-// function resizeElement(elmnt) {
-//   var posX = 0,
-//     posY = 0;
-//   document.getElementById(elmnt.id + "_corner").onmousedown = resizeMouseDown;
-// }
-
-// function resizeMouseDown(e) {
-//       e = e || window.event;
-//     e.preventDefault();
-
-//       pos1 = e.clientX;
-//   pos2 = e.clientY;
-//   document.onmouseup = closeResizeElement;
-//     // call a function whenever the cursor moves:
-//     document.onmousemove = elementResize;
-// }
-
-// function elementResize(e) {
-
-// }
 
 function dragElement(elmnt) {
   var pos1 = 0,
@@ -541,6 +512,7 @@ function dragElement(elmnt) {
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
+    e.srcElement.classList.add("dragging")
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
@@ -563,6 +535,7 @@ function dragElement(elmnt) {
   }
 
   function closeDragElement() {
+    document.getElementsByClassName("dragging")[0].classList.remove("dragging")
     // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
@@ -579,6 +552,10 @@ calendarDays = document.getElementsByTagName("td");
 extra_day = 1;
 start = false;
 increase = false;
+var selected_days = [];
+if (localStorage.selected_days != null) {
+  selected_days = JSON.parse(localStorage.getItem("selected_days"));
+}
 Array.from(calendarDays).forEach(function (el) {
   if (el.id == day) {
     el.classList.add("today");
@@ -595,15 +572,33 @@ Array.from(calendarDays).forEach(function (el) {
       el.classList.add("over");
     }
   } else {
-    el.textContent = 'x';
+    el.textContent = "x";
     el.classList.add("over");
+    el.classList.add("disabled");
+  }
+  if (start == true) {
+    el.id = date.toDateString();
+    date.setDate(date.getDate() + 1);
   }
 
   if (increase == true) {
+    el.classList.remove("disabled");
     el.textContent = extra_day;
     extra_day++;
+    el.id = date.toDateString();
+    date.setDate(date.getDate() + 1);
+  }
+  if (selected_days.includes(el.id)) {
+    el.classList.add("selected");
   }
   el.addEventListener("mousedown", function () {
+    if (el.classList.contains("selected")) {
+      const index = selected_days.indexOf(el.id);
+      selected_days.splice(index, 1);
+    } else {
+      selected_days.push(el.id);
+    }
     el.classList.toggle("selected");
+    localStorage.setItem("selected_days", JSON.stringify(selected_days));
   });
 });

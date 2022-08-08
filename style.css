@@ -200,12 +200,17 @@ body {
   border-radius: 10px 0;
   background-color: rgba(211, 67, 255, 0.35);
   padding: 4px 0;
-  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab;
   box-shadow: 0px 0px 4px 1px rgba(140, 255, 95, 0.87);
-  transition: all 0.5s;
+  transition: box-shadow 0.5s;
 }
 .header:hover {
   box-shadow: 0px 0px 20px 3px #f7ff74;
+}
+.header.dragging {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
 }
 
 #hint {
@@ -319,49 +324,59 @@ th {
 }
 
 td {
-  transition: all 1s;
+  position: relative;
+}
+
+td:not(.disabled) {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+td:not(.disabled):not(.today):not(.selected):after {
+  opacity: 0;
+  transition: all 0.5s;
+  content: "";
+  display: inline-block;
+  width: 120%;
+  height: 120%;
+  box-shadow: 0 0 7px 3px rgba(181, 110, 208, 0.7294117647);
+  position: absolute;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+  transition: all 0.5s;
 }
 
 td {
   font-size: 17px;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1490196078);
 }
-td:hover {
+td:hover:not(.disabled) {
   box-shadow: 0px 0px 4px 3px #ebb8fb;
   transition: all 0.1s;
 }
-td:active {
+td:active:not(.disabled) {
   box-shadow: inset 0px 0px 20px 0px #ebb8fb;
+  transition: all 1s;
 }
 td.over {
   color: gray;
 }
 
-.today {
+.selected:not(.disabled) {
+  box-shadow: 0px 0px 20px 0px #fff;
+  transition: all 0.5s;
   position: relative;
 }
-.today:after {
-  position: absolute;
-  bottom: -5px;
-  content: "●";
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 15px;
-  color: #68bd37;
+.selected:not(.disabled):hover:not(.disabled) {
+  box-shadow: 0px 0px 20px 0px #fff !important;
 }
-
-.selected {
-  box-shadow: 0px 0px 20px 0px #fff;
-  position: relative;
-}
-.selected:hover {
-  box-shadow: 0px 0px 20px 0px #fff;
-}
-.selected:hover:after {
+.selected:not(.disabled):hover:not(.disabled):after:not(.disabled) {
   box-shadow: 0px 0px 4px 3px #ebb8fb;
-  transition: all 0.1s;
+  transition: all 0.5s;
 }
-.selected:after {
+.selected:not(.disabled):after {
+  opacity: 1;
   content: "";
   display: inline-block;
   width: 100%;
@@ -372,4 +387,23 @@ td.over {
   bottom: 50%;
   right: 50%;
   transform: translate(50%, 50%);
+  transition: all 0.5s;
+}
+
+.today:not(.selected):after {
+  position: absolute;
+  bottom: -5px;
+  content: "●";
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+  color: #68bd37;
+}
+
+.today.selected {
+  transition: all 0s;
+}
+.today.selected:after {
+  transition: all 0s;
+  box-shadow: 0 0 7px 3px #68bd37;
 }/*# sourceMappingURL=style.css.map */
