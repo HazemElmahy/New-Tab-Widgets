@@ -14,7 +14,7 @@
 <body>
   <div class="bg"></div>
   <div class="page">
-    <div class="widget p_1" id="kana_widget">
+    <div class="widget r r_1" id="kana_widget">
       <p id="hint"></p>
       <p class="widget_title header" id="kana_widgetheader">
         かな Widget (K)
@@ -22,7 +22,7 @@
       <h4 id="katakana_char"></h4>
       <input placeholder="??" maxlength="2" class="kat_input" id="kat_input" type="text" />
     </div>
-    <div class="widget p_2" id="timer_widget">
+    <div class="widget r r_2" id="timer_widget">
       <p class="widget_title header" id="timer_widgetheader">
         Timer Widget (T)
       </p>
@@ -39,7 +39,7 @@
       <button class="kat_input timer_set" id="timer_start">Start</button>
     </div>
 
-    <div class="widget p_3 big" id="calendar">
+    <div class="widget l l_1 big" id="calendar">
       <p class="widget_title header" id="calendarheader">
         Calendar Widget (C)
       </p>
@@ -101,17 +101,27 @@
         </tr>
       </table>
     </div>
-    <div class="title">
+    <!-- <div class="title">
       <h1 class="grad-text title-text">First Things First!</h1>
       <h1 class="title-text">Just 1 hour...</h1>
-    </div>
-    <label for="task1">
-      <div id="done_it"class="task">
-        <input type="checkbox" name="task1" id="task1" />
-        <div id="task1-box"></div>
-        <label for="task1" id="task1-title"> </label>
+    </div> -->
+
+    <div class="widget r r_3" id="did_it">
+      <p class="widget_title header" id="did_itheader">
+        1H
+      </p>
+
+      <label for="task1">
+        <div id="done_it" class="task">
+          <input type="checkbox" name="task1" id="task1" />
+          <div id="task1-box"></div>
+          <label for="task1" id="task1-title"> </label>
+        </div>
+      </label>
+      <div class="reminder_text" id="done_it_reminder_text">
+        First things first -->
       </div>
-    </label>
+    </div>
     <!-- <div class="tasks">
  
         </div> -->

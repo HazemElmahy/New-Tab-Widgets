@@ -1,7 +1,10 @@
 const timer_containers = document.getElementsByClassName("timer_container");
 const timer_button = document.getElementById("timer_start");
 const snd = new Audio("assets/alarm.wav");
-timer_button.addEventListener("click", timer_start);
+
+function timer_button_listener() {
+  timer_action();
+}
 
 var timerInterval;
 // var beepInterval;
@@ -48,12 +51,13 @@ check_empty();
 function timer_stop() {
   clearInterval(timerInterval);
   // clearInterval(beepInterval);
+  timer_action = timer_start;
   snd.pause();
   snd.currentTime = 0;
   timer_button.textContent = "Start";
   // timer_button.setAttribute("onclick", "timer_start()");
-  timer_button.unbind();
-  timer_button.addEventListener("click", timer_start);
+  // timer_button.replaceWith(timer_button).clone();
+  // timer_button.addEventListener("click", timer_start);
 
   seconds_input.value = s;
   minutes_input.value = m;
@@ -70,10 +74,11 @@ snd.addEventListener("ended", function () {
 });
 
 function timer_start() {
+  timer_action = timer_stop;
   timer_button.textContent = "Stop!";
   // timer_button.setAttribute("onclick", "timer_stop()");
-  timer_button.unbind();
-  timer_button.addEventListener("click", timer_stop);
+  // timer_button.replaceWith(timer_button).clone();
+  // timer_button.addEventListener("click", timer_stop);
   // timer_button.
   // timer_button.classList.add('stop')
   Array.from(timer_containers).forEach(
@@ -149,3 +154,6 @@ Array.from(timer_containers).forEach(function (container) {
     // if (parseInt(this.value, 10) < 10) this.value = "0" + this.value;
   };
 });
+
+timer_action = timer_start;
+timer_button.addEventListener("click", timer_button_listener);

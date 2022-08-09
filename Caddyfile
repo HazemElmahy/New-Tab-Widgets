@@ -1,4 +1,5 @@
 :2022
 
-root * /home/hazem/Personal/startup/
+encode gzip
+root * /home/hazem/Personal/startup
 file_server browse
