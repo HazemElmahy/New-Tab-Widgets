@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style/style.css" />
   <link rel="icon" type="image/x-icon" href="assets/logo.svg" />
   <title>Have you done it?</title>
 </head>
@@ -106,7 +106,7 @@
       <h1 class="title-text">Just 1 hour...</h1>
     </div>
     <label for="task1">
-      <div onclick="save()" class="task">
+      <div id="done_it"class="task">
         <input type="checkbox" name="task1" id="task1" />
         <div id="task1-box"></div>
         <label for="task1" id="task1-title"> </label>
@@ -118,9 +118,10 @@
   </div>
 </body>
 
-<script src="script.js"></script>
-<script type="module" src="kana.js"></script>
-<script src="timer.js"></script>
-<script src="calendar.js"></script>
+<script src="js/main.js"></script>
+<script src="js/done_it.js"></script>
+<script src="js/kana.js" type="module"></script>
+<script src="js/timer.js"></script>
+<script src="js/calendar.js"></script>
 
 </html>

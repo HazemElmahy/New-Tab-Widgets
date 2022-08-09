@@ -38,25 +38,6 @@ document.onkeydown = function (e) {
   }
 };
 
-load_();
-
-function save() {
-  for (i = 0; i < checkboxes.length; i++) {
-    localStorage.setItem(checkboxes[i].value, checkboxes[i].checked);
-  }
-
-  for (i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].checked =
-      localStorage.getItem(checkboxes[i].value) === "true" ? true : false;
-  }
-}
-
-function load_() {
-  for (i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].checked =
-      localStorage.getItem(checkboxes[i].value) === "true" ? true : false;
-  }
-}
 
 Array.from(widgets).forEach(function (widget) {
   const corner = document.createElement("div");

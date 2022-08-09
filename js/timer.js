@@ -52,7 +52,7 @@ function timer_stop() {
   snd.currentTime = 0;
   timer_button.textContent = "Start";
   // timer_button.setAttribute("onclick", "timer_start()");
-  timer_button.removeEventListener("click", timer_stop);
+  timer_button.unbind();
   timer_button.addEventListener("click", timer_start);
 
   seconds_input.value = s;
@@ -72,7 +72,7 @@ snd.addEventListener("ended", function () {
 function timer_start() {
   timer_button.textContent = "Stop!";
   // timer_button.setAttribute("onclick", "timer_stop()");
-  timer_button.removeEventListener("click", timer_start);
+  timer_button.unbind();
   timer_button.addEventListener("click", timer_stop);
   // timer_button.
   // timer_button.classList.add('stop')

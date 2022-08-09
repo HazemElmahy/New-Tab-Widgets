@@ -1,10 +1,10 @@
 @font-face {
   font-family: Nunito;
-  src: url("assets/Nunito/Nunito-VariableFont_wght.ttf");
+  src: url("../assets/Nunito/Nunito-VariableFont_wght.ttf");
 }
 @font-face {
   font-family: Kosugi_Maru;
-  src: url("assets/Kosugi_Maru/KosugiMaru-Regular.ttf");
+  src: url("../assets/Kosugi_Maru/KosugiMaru-Regular.ttf");
 }
 *:disabled {
   pointer-events: none;
@@ -23,7 +23,7 @@ body {
 
 .bg {
   z-index: -1;
-  background-image: url("assets/cmyk-umbrella.png");
+  background-image: url("../assets/cmyk-umbrella.png");
   background-size: cover;
   filter: blur(40px);
   position: absolute;

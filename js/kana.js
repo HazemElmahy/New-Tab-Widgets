@@ -1,4 +1,4 @@
-import kana_obj from "./kana.json" assert { type: "json" };
+import kana_obj from "../data/kana.json" assert { type: "json" };
 
 var kata = "";
 
