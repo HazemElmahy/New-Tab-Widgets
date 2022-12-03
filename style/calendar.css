@@ -1,0 +1,50 @@
+.top_center {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.input_theme {
+  color: black;
+  font-weight: bold;
+  padding-left: 10px;
+  background-color: rgba(255, 255, 255, 0.431372549);
+  border: none;
+  box-shadow: 0 0 12px 0px #988799;
+  border-radius: 6px;
+  transition: 0.3s all;
+}
+
+.add_input {
+  height: 20px;
+  width: 23vw;
+  border-radius: 13px 0 0 5px;
+}
+
+.add_btn {
+  height: 23px;
+  padding: 0px 9px;
+}
+.add_btn:hover {
+  box-shadow: -1px 0px 20px 6px #518e5e;
+  transform: scale(1.5);
+}
+.add_btn:active {
+  box-shadow: -1px 0px 20px 6px #000000;
+  transform: scale(0.6);
+}
+.add_btn:disabled {
+  background-color: #bebebe;
+}
+
+.tasks_area {
+  display: flex;
+  flex-direction: column-reverse;
+  transition: 0.2s all;
+}
+
+.c_task {
+  margin: 10px;
+  transition: 0.2s all;
+}/*# sourceMappingURL=calendar.css.map */

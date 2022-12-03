@@ -1,5 +1,5 @@
-:2022
-
-encode gzip
-root * /home/hazem/Personal/startup
-file_server browse
+:2022 {
+	encode gzip
+	root * /home/hazem/Personal/startup
+	file_server browse
+}

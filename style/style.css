@@ -26,6 +26,7 @@ body {
   z-index: -1;
   background-image: url("../assets/cmyk-umbrella.png");
   background-size: cover;
+  background-position-y: 40%;
   filter: blur(40px);
   position: absolute;
   height: 100%;
@@ -69,17 +70,12 @@ label {
 
 .task {
   width: 50%;
-  /* padding: 20px; */
-  /* position: absolute; */
   margin: auto;
   font-size: 20px;
-  /* height: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.5s;
-  /* height: 100%; */
-  /* max-height: 63px; */
   padding: 0;
   margin: 0;
   height: 100%;
@@ -91,7 +87,7 @@ label {
 .task:hover {
   box-shadow: 0 0 6px 2px rgba(181, 110, 208, 0.41);
   border-radius: 100%;
-  transform: rotate(360deg) scale(1.2);
+  transform: rotate(-30deg) scale(1.2);
 }
 .task:active {
   opacity: 0.1;
@@ -263,13 +259,26 @@ label {
 
 #hint {
   position: absolute;
-  right: 5px;
-  top: 20%;
+  right: 0;
+  top: 20px;
   margin: 0;
-  color: darkslategrey;
   font-size: 15px;
   font-weight: bold;
   transition: all 0.1s;
+}
+
+#meaning {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  transition: all 0.1s;
+}
+#meaning.small {
+  font-size: 0px;
 }
 
 .hint_hidden {
@@ -464,8 +473,78 @@ td.over {
   white-space: nowrap;
   top: 55%;
   opacity: 1;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 .reminder_text.hidden {
   opacity: 0;
+}
+
+#kana-score {
+  width: 150px;
+  height: 150px;
+  box-shadow: inset 0 0 58px 10px rgba(255, 255, 255, 0.2705882353);
+  border-radius: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  font-size: 38px;
+  font-weight: bolder;
+  transition: all 0.5s;
+  transform: translate(-50%, -50%);
+}
+#kana-score.light {
+  box-shadow: 0 0 58px 10px rgba(255, 255, 255, 0.27);
+  background-color: #99ef99;
+}
+
+#kana-count {
+  font-size: 13px;
+  position: absolute;
+  color: rgba(255, 255, 255, 0.8196078431);
+  bottom: 10%;
+}
+
+.links {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.links a {
+  color: white;
+  transition: 0.5s all;
+  text-decoration: none;
+}
+.links a:hover {
+  background: -webkit-linear-gradient(360deg, #333 -4%, #eeeeee 24%, #333 65%);
+  -webkit-animation: gradient 20s ease infinite;
+          animation: gradient 20s ease infinite;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.links a:after {
+  content: " ➔";
+}
+
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: 1000px;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: 1000px;
+  }
 }/*# sourceMappingURL=style.css.map */

@@ -13,7 +13,8 @@ if (localStorage.selected_days != null) {
   selected_days = JSON.parse(localStorage.getItem("selected_days"));
 }
 Array.from(calendarDays).forEach(function (el) {
-  if (el.id == day) {
+  console.log(el.id);
+  if (start == false && el.id == day) {
     el.classList.add("today");
     start = true;
   } else {
@@ -23,7 +24,7 @@ Array.from(calendarDays).forEach(function (el) {
     el.textContent = day_number;
     day_number++;
     if (day_number == last_day + 2) {
-      start = false;
+      // start = false;
       increase = true;
       el.classList.add("over");
     }
@@ -39,6 +40,7 @@ Array.from(calendarDays).forEach(function (el) {
 
   if (increase == true) {
     el.classList.remove("disabled");
+    el.classList.add("over");
     el.textContent = extra_day;
     extra_day++;
     el.id = date.toDateString();
