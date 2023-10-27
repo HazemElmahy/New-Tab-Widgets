@@ -4,9 +4,9 @@ simple page where you can make you own html elements and be able to drag them ar
 Current Widgets
 
 1- かな widget:
-gives unlimited japanese kana quizes.
+  japanese kana quizes.
 
 2- timer widget:
 
 3- calendar widget:
-simple calendar to show current day and mark important days and deadlines(saves to localStorage).
+  display calendar saves the state in localstorage.
